@@ -1,10 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>page</b>
-  <%= @page.name %>
-  <span style='color:#777'><%= @page.page_id %></span>
-</p>
+<%= render :partial=>"details", :locals=>{:page=>@page, :image_type=>:large} %>
 
 <p>
 	<table>

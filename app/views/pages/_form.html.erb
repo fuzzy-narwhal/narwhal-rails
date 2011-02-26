@@ -13,7 +13,8 @@
 
   <div class="field">
     <%= f.label :page_id, "Page ID" %><br />
-    http://facebook.com/<%= f.text_field :page_id %>
+    http://facebook.com/<%= f.text_field :page_id %><br/>
+	<img id="profile_pic" src="" style="height:50px; width: 50px;"/>
   </div>
 
   <div class="field">
@@ -28,6 +29,8 @@
 
 
 <script>
+$('#page_page_id').change( function(e) { $('#profile_pic').attr('src','http://graph.facebook.com/'+e.target.value+'/picture') });
+
 $(function() {
 	function split( val ) {
 		return val.split( /,\s*/ );
