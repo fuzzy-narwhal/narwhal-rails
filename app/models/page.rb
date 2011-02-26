@@ -16,8 +16,10 @@ class Page < ActiveRecord::Base
     @category_tags = tags.map(&:downcase).map(&:strip).reject(&:empty?)
   end
   
-  def profile_picture_url(size="small")
-    "http://graph.facebook.com/#{self.page_id}/picture?size=#{size}"
+  # Generate the url for the profile pic on facebook
+  # Takes a type ('square','small',large') to scale the image 
+  def profile_picture_url(type="square")
+    "http://graph.facebook.com/#{self.page_id}/picture?type=#{type}"
   end
   
   private
