@@ -14,6 +14,7 @@ class PagesController < ApplicationController
   # GET /pages/1.xml
   def show
     @page = Page.find(params[:id])
+    @posts = Post.find_all_by_page_id(@page[:id])
 
     respond_to do |format|
       format.html # show.html.erb

@@ -18,6 +18,7 @@
     <th>Created time</th>
     <th>Updated time</th>
     <th>Comments</th>
+	<th>Page</th>
     <th></th>
     <th></th>
     <th></th>
@@ -43,6 +44,7 @@
     <td><%= post.created_time %></td>
     <td><%= post.updated_time %></td>
     <td><%= post.comments %></td>
+	<td><%= post.page_id %></td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>

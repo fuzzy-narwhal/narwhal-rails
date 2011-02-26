@@ -15,14 +15,14 @@ def header (s)
   puts line  
 end
 
-def save_posts(url)
+def save_posts(page, url)
   response = RestClient.get(url)
   json = JSON.parse(response)
   count = 0
-
+  
   json['data'].each do |j|
     if Post.find_by_post_id(j['id']).nil?
-      post = Post.new()
+      post = page.posts.new()
       post[:post_id] = j['id']
       post[:message] = j['message']
       post[:picture] = j['picture']
@@ -33,7 +33,6 @@ def save_posts(url)
       post[:movie_url] = j['source']
       post[:icon] = j['icon']
       post[:attribution] = j['attribution']
-
 
       if j.has_key? 'likes'
         post[:likes] = j['likes']['count']
@@ -64,7 +63,7 @@ def crawl
   Page.find(:all).each do |page|
     facebook_url = 'https://graph.facebook.com/' + page.page_id + '/posts'
     puts 'working on ' + facebook_url
-    save_posts facebook_url
+    save_posts page, facebook_url
   end
       
 end

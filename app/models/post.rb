@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
+  belongs_to :page
 end
+
 
 # == Schema Information
 #
@@ -24,5 +26,6 @@ end
 #  comments         :integer
 #  created_at       :datetime
 #  updated_at       :datetime
+#  page_id          :integer
 #
 
