@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Fb:</b>
+  <%= @status.fb_id %>
+</p>
+
+<p>
+  <b>From:</b>
+  <%= @status.from %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%= @status.message %>
+</p>
+
+<p>
+  <b>Updated time:</b>
+  <%= @status.updated_time %>
+</p>
+
+<p>
+  <b>Comments count:</b>
+  <%= @status.comments_count %>
+</p>
+
+<p>
+  <b>Likes count:</b>
+  <%= @status.likes_count %>
+</p>
+
+
+<%= link_to 'Edit', edit_status_path(@status) %> |
+<%= link_to 'Back', statuses_path %>

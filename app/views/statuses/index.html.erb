@@ -1,0 +1,33 @@
+<h1>Listing statuses</h1>
+
+<table>
+  <tr>
+    <th>Fb</th>
+    <th>From</th>
+    <th>Message</th>
+    <th>Updated time</th>
+    <th>Comments count</th>
+    <th>Likes count</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @statuses.each do |status| %>
+  <tr>
+    <td><%= status.fb_id %></td>
+    <td><%= status.from %></td>
+    <td><%= status.message %></td>
+    <td><%= status.updated_time %></td>
+    <td><%= status.comments_count %></td>
+    <td><%= status.likes_count %></td>
+    <td><%= link_to 'Show', status %></td>
+    <td><%= link_to 'Edit', edit_status_path(status) %></td>
+    <td><%= link_to 'Destroy', status, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Status', new_status_path %>
