@@ -1,9 +1,11 @@
 NarwhalRails::Application.routes.draw do
-  resources :pages
-
-  resources :posts
   
+  get 'categories/autocomplete_category_name'
+  resources :pages
+  resources :posts
+  resources :categories
   root :to => 'pages#index'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
