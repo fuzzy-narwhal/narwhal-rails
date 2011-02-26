@@ -1,0 +1,11 @@
+<div class="post_thumbnail">
+  <h3 class="post_title">
+  	<%= post.page.category_tags.map(&:titleize).join("/") %> > <%= post.page.name%>
+  </h3>
+  <%= image_tag post.page.profile_picture_url %>
+  <span class="post_body">
+  	<p><%= post.message %></p>
+	<p><%= link_to post.link_name, post.link_url unless post.link_url.nil? %></p>
+    <p><%= post.link_description unless post.link_description.nil? %></p>
+  </span>  
+</div>

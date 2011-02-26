@@ -100,7 +100,8 @@ def save_posts(page, url)
       post[:movie_url] = j['source']
       post[:icon] = j['icon']
       post[:attribution] = j['attribution']
-
+      post[:created_at] = j['created_time']
+      
       if j.has_key? 'likes'
         post[:likes] = j['likes']['count']
       end
