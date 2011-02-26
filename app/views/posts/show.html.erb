@@ -1,0 +1,85 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Likes:</b>
+  <%= @post.likes %>
+</p>
+
+<p>
+  <b>Post:</b>
+  <%= @post.post_id %>
+</p>
+
+<p>
+  <b>From:</b>
+  <%= @post.from %>
+</p>
+
+<p>
+  <b>To:</b>
+  <%= @post.to %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%= @post.message %>
+</p>
+
+<p>
+  <b>Picture:</b>
+  <%= @post.picture %>
+</p>
+
+<p>
+  <b>Link url:</b>
+  <%= @post.link_url %>
+</p>
+
+<p>
+  <b>Link name:</b>
+  <%= @post.link_name %>
+</p>
+
+<p>
+  <b>Link caption:</b>
+  <%= @post.link_caption %>
+</p>
+
+<p>
+  <b>Link description:</b>
+  <%= @post.link_description %>
+</p>
+
+<p>
+  <b>Movie url:</b>
+  <%= @post.movie_url %>
+</p>
+
+<p>
+  <b>Icon:</b>
+  <%= @post.icon %>
+</p>
+
+<p>
+  <b>Attribution:</b>
+  <%= @post.attribution %>
+</p>
+
+<p>
+  <b>Created time:</b>
+  <%= @post.created_time %>
+</p>
+
+<p>
+  <b>Updated time:</b>
+  <%= @post.updated_time %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @post.comments %>
+</p>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

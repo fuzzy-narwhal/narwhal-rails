@@ -1,0 +1,81 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :likes %><br />
+    <%= f.text_field :likes %>
+  </div>
+  <div class="field">
+    <%= f.label :post_id %><br />
+    <%= f.text_field :post_id %>
+  </div>
+  <div class="field">
+    <%= f.label :from %><br />
+    <%= f.text_field :from %>
+  </div>
+  <div class="field">
+    <%= f.label :to %><br />
+    <%= f.text_field :to %>
+  </div>
+  <div class="field">
+    <%= f.label :message %><br />
+    <%= f.text_field :message %>
+  </div>
+  <div class="field">
+    <%= f.label :picture %><br />
+    <%= f.text_field :picture %>
+  </div>
+  <div class="field">
+    <%= f.label :link_url %><br />
+    <%= f.text_field :link_url %>
+  </div>
+  <div class="field">
+    <%= f.label :link_name %><br />
+    <%= f.text_field :link_name %>
+  </div>
+  <div class="field">
+    <%= f.label :link_caption %><br />
+    <%= f.text_field :link_caption %>
+  </div>
+  <div class="field">
+    <%= f.label :link_description %><br />
+    <%= f.text_field :link_description %>
+  </div>
+  <div class="field">
+    <%= f.label :movie_url %><br />
+    <%= f.text_field :movie_url %>
+  </div>
+  <div class="field">
+    <%= f.label :icon %><br />
+    <%= f.text_field :icon %>
+  </div>
+  <div class="field">
+    <%= f.label :attribution %><br />
+    <%= f.text_field :attribution %>
+  </div>
+  <div class="field">
+    <%= f.label :created_time %><br />
+    <%= f.datetime_select :created_time %>
+  </div>
+  <div class="field">
+    <%= f.label :updated_time %><br />
+    <%= f.datetime_select :updated_time %>
+  </div>
+  <div class="field">
+    <%= f.label :comments %><br />
+    <%= f.text_field :comments %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
