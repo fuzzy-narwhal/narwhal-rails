@@ -6,7 +6,7 @@ class Page < ActiveRecord::Base
   before_save :store_category_tags
   
   def category_tags
-    @category_tags ||= self.categories.map(&:name)
+    @category_tags ||= self.categories.map(&:name) 
   end
   
   # Assign categories to the page using the category name 
@@ -25,7 +25,7 @@ class Page < ActiveRecord::Base
   private
   
   def store_category_tags
-    self.categories = @category_tags.map{|tag| Category.find_or_create_by_name(tag)}
+    self.categories = @category_tags.map{|tag| Category.find_or_create_by_name(tag)} if @category_tags
   end
       
 
