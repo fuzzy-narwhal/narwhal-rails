@@ -1,23 +1,9 @@
-require "rubygems"
 require "../config/environment.rb"
-require 'mechanize'
-require "net/http"
-require "logger"
-require "hpricot"
-require 'open-uri'
-require 'uri'
-require 'text'
+require 'restclient'
+require 'json'
 
-$KCODE='u' 
-require 'jcode' 
-
-    
-begin
-  require '/usr/local/lib/ruby/gems/1.8/gems/mechanize-0.7.0/lib/www/mechanize.rb'
-rescue MissingSourceFile
-end
-require  'mechanize'
-
+#$KCODE='u' 
+#require 'jcode' 
 
 def header (s)
   return unless s
@@ -29,12 +15,57 @@ def header (s)
   puts line  
 end
 
+def save_posts(page, url)
+  response = RestClient.get(url)
+  json = JSON.parse(response)
+  count = 0
+  
+  json['data'].each do |j|
+    if Post.find_by_post_id(j['id']).nil?
+      post = page.posts.new()
+      post[:post_id] = j['id']
+      post[:message] = j['message']
+      post[:picture] = j['picture']
+      post[:link_url] = j['link']
+      post[:link_name] = j['name']
+      post[:link_caption] = j['caption']
+      post[:link_description] = j['description']
+      post[:movie_url] = j['source']
+      post[:icon] = j['icon']
+      post[:attribution] = j['attribution']
+
+      if j.has_key? 'likes'
+        post[:likes] = j['likes']['count']
+      end
+
+      if j.has_key? 'from'
+        post[:from] = j['from']['id']
+      end
+
+      if j.has_key? 'comments'
+        post[:comments] = j['comments']['count']
+      end
+
+      post.save!
+      count = count + 1
+    else
+      puts j['id'] + ' already seeded.'
+    end
+    
+    puts count.to_s + ' posts saved'
+  end
+  
+  
+end
+
 
 def crawl
-  Page.find(:all).each{|page|
-      facebook_url = page.url
+  Page.find(:all).each do |page|
+    facebook_url = 'https://graph.facebook.com/' + page.page_id + '/posts'
+    puts 'working on ' + facebook_url
+    save_posts page, facebook_url
+  end
       
-    }
 end
 
 def main(args)

@@ -1,13 +1,19 @@
 # SQLite version 3.x
 #   gem install sqlite3
-development:
-    adapter: mysql
-    database: narwhal
-    username: narwhal
-    password: narwhal
-    host: 127.0.0.1
-    port: 3306
+# development:
+#     adapter: mysql
+#     database: narwhal
+#     username: narwhal
+#     password: narwhal
+#     host: 127.0.0.1
+#     port: 3306
 
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+  
 #    create database narwhal;
 #    mysql> grant all on narwhal.* to 'narwhal'@'127.0.0.1' identified by 'narwhal';
 

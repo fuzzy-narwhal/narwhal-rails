@@ -3,21 +3,22 @@
 <table>
   <tr>
     <th>Likes</th>
-    <th>Post</th>
+    <th>Post_ID</th>
     <th>From</th>
     <th>To</th>
     <th>Message</th>
     <th>Picture</th>
     <th>Link url</th>
-    <th>Link name</th>
+    <!-- <th>Link name</th>
     <th>Link caption</th>
-    <th>Link description</th>
+    <th>Link description</th> -->
     <th>Movie url</th>
     <th>Icon</th>
     <th>Attribution</th>
     <th>Created time</th>
     <th>Updated time</th>
     <th>Comments</th>
+	<th>Page</th>
     <th></th>
     <th></th>
     <th></th>
@@ -30,17 +31,20 @@
     <td><%= post.from %></td>
     <td><%= post.to %></td>
     <td><%= post.message %></td>
-    <td><%= post.picture %></td>
-    <td><%= post.link_url %></td>
-    <td><%= post.link_name %></td>
+    <td><%= image_tag post.picture unless post.picture.nil? %></td>
+    <td><%= link_to post.link_name, post.link_url unless post.link_url.nil? %>
+		<%= post.link_caption unless post.link_caption.nil? %>
+		<%= post.link_description unless post.link_description.nil? %></td>
+    <!-- <td><%= post.link_name %></td>
     <td><%= post.link_caption %></td>
-    <td><%= post.link_description %></td>
-    <td><%= post.movie_url %></td>
-    <td><%= post.icon %></td>
+    <td><%= post.link_description %></td> -->
+    <td><%= link_to post.movie_url unless post.movie_url.nil? %></td>
+    <td><%= image_tag post.icon unless post.icon.nil? %></td>
     <td><%= post.attribution %></td>
     <td><%= post.created_time %></td>
     <td><%= post.updated_time %></td>
     <td><%= post.comments %></td>
+	<td><%= post.page_id %></td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
