@@ -39,32 +39,36 @@ response = RestClient.get('https://graph.facebook.com/39740541374/posts')
 json = JSON.parse(response)
 
 json['data'].each do |j|
-  post = Post.new()
-  post[:post_id] = j['id']
-  post[:message] = j['message']
-  post[:picture] = j['picture']
-  post[:link_url] = j['link']
-  post[:link_name] = j['name']
-  post[:link_caption] = j['caption']
-  post[:link_description] = j['description']
-  post[:movie_url] = j['source']
-  post[:icon] = j['icon']
-  post[:attribution] = j['attribution']
+  if Post.find_by_post_id(j['id']).nil?
+    post = Post.new()
+    post[:post_id] = j['id']
+    post[:message] = j['message']
+    post[:picture] = j['picture']
+    post[:link_url] = j['link']
+    post[:link_name] = j['name']
+    post[:link_caption] = j['caption']
+    post[:link_description] = j['description']
+    post[:movie_url] = j['source']
+    post[:icon] = j['icon']
+    post[:attribution] = j['attribution']
   
   
-  if j.has_key? 'likes'
-    post[:likes] = j['likes']['count']
-  end
+    if j.has_key? 'likes'
+      post[:likes] = j['likes']['count']
+    end
 
-  if j.has_key? 'from'
-    post[:from] = j['from']['id']
-  end
+    if j.has_key? 'from'
+      post[:from] = j['from']['id']
+    end
 
-  if j.has_key? 'comments'
-    post[:comments] = j['comments']['count']
-  end
+    if j.has_key? 'comments'
+      post[:comments] = j['comments']['count']
+    end
 
-  post.save!
+    post.save!
+  else
+    puts j['id'] + ' already seeded.'
+  end
 end
 
                   
