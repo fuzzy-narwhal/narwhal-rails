@@ -1,5 +1,13 @@
 class Post < ActiveRecord::Base
   belongs_to :page
+  
+  scope :recent, order("created_at desc")
+  
+  scope :for_category, lambda {|category|
+    category = Category.find_by_name(category.downcase) if category.is_a?(String)
+    joins(:page=>:categories_pages).where(:categories_pages=>{:category_id=>category})
+  }
+  
 end
 
 

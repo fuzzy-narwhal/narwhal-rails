@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%=@category.name%></h1>
+<h1><%=@category.name.titleize %></h1>
 
 <%= render :partial=>"/pages/details" ,:collection=>@category.pages, :as=>:page, :locals=>{:image_type=>:square} %>
 
