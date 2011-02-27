@@ -25,7 +25,6 @@ time,mark,audio,video{
   font-size:100%;
   font:inherit;
   vertical-align:baseline;
-  color: #fff;
   font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
@@ -68,16 +67,11 @@ table{
 /*------------------------------------*\
   MAIN
 \*------------------------------------*/
-body
-{
-  background-color: #333;
-}
-
 #container
 {
   width: 960px;
-  margin: 80px auto;
-  position: relative;
+  margin: 20px auto;
+  background-color: #fff;
 }
 
 #headline
@@ -135,7 +129,10 @@ body
 
 header
 {
-  padding: 40px 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  height: 60px;
 }
 
 #logo h1
@@ -164,18 +161,28 @@ header
 
 #login ul li
 {
-  float: left;
+  float: right;
   margin-left: 10px;
+}
+
+#login a
+{
+  color: #0070cc;
 }
 
 #logo
 {
+  display: inline;
+  padding: 20px 0 0;
   float: left;
+  width: 50%;
 }
 
 #login
 {
   float: right;
+  width: 50%;
+  padding-top: 20px;
 }
 
 #primary-content ul li
@@ -187,15 +194,15 @@ header
 
 nav
 {
-  float: left;
+  text-align: left;
   border-top: 2px solid #a6a6a6;
   width: 100%;
   background-color: #eaeaea;
+  height: 60px;
 }
 
 nav ul
 {
-  float: left;
   padding-left: 20px;
   margin: 0 auto;
 }
@@ -218,9 +225,11 @@ nav ul li
 
 #primary-content-header
 {
-  border-top: 2px solid #a73300;
-  padding: 20px;
-  background-color: #575757;
+  border-bottom: 2px solid #a73300;
+  padding: 20px 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 36px;
+  font-weight: 900;
 }
 
 .image-left
@@ -238,15 +247,15 @@ nav ul li
 
 .feed-title
 {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 100;
-  line-height: 27px;
+  line-height: 36px;
   text-shadow: #a6a6a6 1px 1px 2px;
 }
 
 .feed-body
 {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 300;
   line-height: 21px;
 }

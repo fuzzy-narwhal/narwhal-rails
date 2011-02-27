@@ -18,6 +18,11 @@
   </div>
 
   <div class="field">
+	<%= f.label :section, "High Level Section" %><br />
+	<%= f.select :section, Section.all.map{|s| [ s.name, s.id ] } %>
+  </div>
+
+  <div class="field">
 	<%= f.label :category_name %><br />
 	<%= f.text_field :category_tags, :value=>@page.category_tags.join(", ") %>
   </div>
