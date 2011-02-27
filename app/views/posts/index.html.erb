@@ -46,7 +46,7 @@
             <img src='<%=post.icon%>'/>
             </span>
           <%end%>
-          Posted <%= time_ago_in_words post.created_time %> ago
+          <%= link_to "Posted #{time_ago_in_words post.created_time} ago", post.post_url %>
           
           </div>
         </div>
