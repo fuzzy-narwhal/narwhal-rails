@@ -13,6 +13,7 @@ NarwhalRails::Application.routes.draw do
   match 'entity-transitioned.html', :to => 'pages#entity-transitioned'
 
   match 'pretty_posts' => 'posts#pretty_posts'
+  match 'events' => 'posts#events'
   match 'home' => 'pages#home'
 
   # The priority is based upon order of creation:
