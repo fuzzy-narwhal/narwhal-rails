@@ -14,12 +14,11 @@
   <div class="field">
     <%= f.label :page_id, "Page ID" %><br />
     http://facebook.com/<%= f.text_field :page_id %><br/>
-	<img id="profile_pic" src="" style="height:50px; width: 50px;"/>
   </div>
-
+  
   <div class="field">
-	<%= f.label :section, "High Level Section" %><br />
-	<%= f.select :section, Section.all.map{|s| [ s.name, s.id ] } %>
+	<%= f.label :section_id, "High Level Section" %><br />
+	<%= f.select :section_id, Section.all.map{|s| [ s.name, s.id ] } %>
   </div>
 
   <div class="field">
@@ -33,8 +32,28 @@
 <% end %>
 
 
+<div style="width: 500px">
+	Page Preview
+  <div id="page_preview" style="padding: 1em"></div>
+  <div style="clear:both"></div>
+</div>
+
+
 <script>
-$('#page_page_id').change( function(e) { $('#profile_pic').attr('src','http://graph.facebook.com/'+e.target.value+'/picture') });
+
+function update_page_preview(r) {
+	var html = '<h2>'+r['name']+'</h2>';
+	if (r['picture'] != undefined)
+	  html += "<img style='float:left; margin: 0 1em 1em 0' src='"+r['picture']+"'/>";	
+	if (r['company_info'] != undefined)
+	  html += '<p>'+r['company_info']+'</p>';
+	if (r['mission'] != undefined)
+	  html += '<p>'+r['mission']+'</p>';
+	
+	$('#page_preview').html(html);
+}
+
+$('#page_page_id').change( function(e) { FB.api(e.target.value, update_page_preview ) });
 
 $(function() {
 	function split( val ) {
