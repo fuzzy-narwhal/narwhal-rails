@@ -2,12 +2,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = Post.recent.limit(100)
+    @posts = Post.recent.limit(5)
     @events = Event.current(params[:category])
     if name = params[:category]
       category = Category.find_by_name(name.downcase)
       @posts = Post.recent.for_category(category.id)
     end
+    
+    @pages = Page.get_recommendations(category)
     
     respond_to do |format|
       format.html # index.html.erb
