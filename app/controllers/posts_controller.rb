@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   # GET /posts.xml
   def index
     @posts = Post.recent.limit(10)
-    
+    @events = Event.current
     if name = params[:category]
       category = Category.find_by_name(name.downcase)
       @posts = Post.recent.for_category(category.id)
@@ -16,7 +16,6 @@ class PostsController < ApplicationController
   end
 
   def events
-    @events = Event.find_by_sql(["select * from events where end_time>? order by start_time asc limit 100",DateTime.now])
     
   end
 
