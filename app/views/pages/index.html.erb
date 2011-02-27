@@ -1,19 +1,23 @@
-<div id="container">
-  <div id="dialog" style="display:none;">
-    <p>I'M LOGGING INTO FACEBOOK LOL!</p>
-  </div>
-  <div id="headline">
-    <h1>urbanite boston</h1>
-    <h2>Discover arts, entertainment and culture through the things you like on Facebook.</h2>
-    <p>Urbanite Boston shows you artists, venues, theaters, groups and associations that are similar to the Facebook pages you like on Facebook.</p>
-  </div>
-  <div id="headlinePicture">
-    <%= image_tag "narwhal.jpg", :height => 267, :width => 400, :style => 'margin-top:20px;' %>
-    <div id="facebookConnect">
-      <a href="#" onclick="openFbDialog();return false;">
-        <%= image_tag "fbconnect.png" %>
-      </a>
-    </div>
-  </div>
-</div>
+<table>
+  <tr>
+    <th>Page</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
 
+<% @pages.each do |page| %>
+  <tr>
+    <td><%= page.page_id %></td>
+    <td><%= page.name %></td>
+    <td><%= page.category_tags %></td>
+    <td><%= link_to 'Show', page %></td>
+    <td><%= link_to 'Edit', edit_page_path(page) %></td>
+    <td><%= link_to 'Destroy', page, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Page', new_page_path %>

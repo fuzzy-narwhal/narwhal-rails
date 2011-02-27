@@ -1,5 +1,10 @@
 <div class="page_detail">
-  <%= image_tag page.profile_picture_url(image_type) %>
-  <%= page.page_id %>
-  (<%= page.posts.count %> posts)
+  <h2><%= page.name %></h2>
+  <%= image_tag page.profile_picture_url(image_type) %><br/>
+  
+  <table>
+	<tr><td>Page:</td><td><%= link_to page.link if page.link %></td></tr>
+	<tr><td>Posts:</td><td><%= page.posts.count %></td></tr>
+	<tr><td>Likes:</td><td><%= page.likes || 0 %></td></tr>
+  </table>
 </div>

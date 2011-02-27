@@ -2,7 +2,21 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = Post.order("created_at desc").all
+    @posts = Post.recent
+    
+    if name = params[:category]
+      category = Category.find_by_name(name.downcase)
+      @posts = Post.recent.for_category(category.id)
+    end
+    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @posts }
+    end
+  end
+
+  def pretty_posts
+    @posts = Post.all(:order=>'created_time desc',:limit=>params[:limit]||100)
 
     respond_to do |format|
       format.html # index.html.erb

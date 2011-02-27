@@ -90,7 +90,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  json
+  json (= 1.1.2)
   rails (= 3.0.4)
   rails3-jquery-autocomplete
   rest-client
