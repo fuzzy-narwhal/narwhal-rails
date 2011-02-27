@@ -1,20 +1,24 @@
 class PostsController < ApplicationController
   
+  def get_cookie(name)
+    cookies[name]
+  end
+  
+  def set_cookie(name,value,path="/",expires=10.years.from_now)
+    cookies[name] = {
+                          :value => value,
+                          :expires => expires,
+                          :path => path
+                    }
+  end
+
   before_filter :authenticate_user! unless :index
   
   # GET /posts
   # GET /posts.xml
   def index
-<<<<<<< HEAD
-    @posts = Post.recent.limit(5)
-    @events = Event.current(params[:category])
-    if name = params[:category]
-      category = Category.find_by_name(name.downcase)
-      @posts = Post.recent.for_category(category.id)
-    end
-=======
     section = params[:section]
-    @category_name=(section||"all").capitalize
+    @category_name=(section||"recent").capitalize
     
     posts_scope = Post.recent.for_section(params[:section])
     @posts = posts_scope.for_category(params[:category]).limit(75).includes(:page)
@@ -22,14 +26,16 @@ class PostsController < ApplicationController
     
     category_tag_ids = posts_scope.joins(:page=>:categories_pages).group("category_id").order("count(*)").select("category_id").limit(10).map(&:category_id)
     @category_tags = Category.find(category_tag_ids).map(&:name)
->>>>>>> 90a7806693df2c57cdea3498e8c230a141c1df57
     
-    @pages = Page.get_recommendations(category)
+    @pages = Page.get_recommendations(@category_name)
     
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @posts }
     end
+    @show_announcement=true
+    #@show_announcement=false if get_cookie('urbaniteboston')
+    #set_cookie('urbaniteboston',true)
   end
 
   def events
