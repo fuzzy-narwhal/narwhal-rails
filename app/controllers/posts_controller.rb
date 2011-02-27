@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = Post.recent
+    @posts = Post.recent.limit(10)
     
     if name = params[:category]
       category = Category.find_by_name(name.downcase)
