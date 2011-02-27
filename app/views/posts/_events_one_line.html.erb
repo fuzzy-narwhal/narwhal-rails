@@ -1,0 +1,19 @@
+<h2><%=@category_name%> Events</h2>
+<%@events.each_with_index{|event,i|%>
+ <div style='width:310px;border-bottom:1px solid #ccc;margin-top:6px;padding-top:6px;'>
+     <div style='vertical-align:0px;position:absolute;'>
+     <img src='/images/cal_icon.png'/>
+     </div>
+     <div style='font-size:13px;margin-left:23px'>
+   <%=Date::MONTHNAMES[event.start_time.month]%> <%=event.start_time.day%>
+     <%if event.end_time-event.start_time>100000%>
+     - <%=Date::MONTHNAMES[event.end_time.month]%> <%=event.end_time.day%>
+     <%end%>
+  </div>
+   <div style='margin-left:23px;font-weight:bold;color:#555;padding-bottom:4px'><%=event.name%> </div>
+     <!--<a href='http://www.facebook.com?event.php?eid=<%=event.event_id%>'>-->
+   <div style='margin-left:23px;font-weight:normal;color:#aaa;padding-bottom:4px'><%=event.location%>
+     
+     </div>
+  </div>
+<%}%>

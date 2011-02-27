@@ -5,9 +5,10 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = Post.recent.for_section(params[:section]).for_category(params[:category]).limit(50).includes(:page)
-    @events = Event.recent.for_section(params[:section]).for_category(params[:category]).limit(50).includes(:page)
-
+    category = params[:category]
+    @category_name=(category||"all").capitalize
+    @posts = Post.recent.for_section(params[:section]).for_category(params[:category]).limit(75).includes(:page)
+    @events = Event.recent.for_section(params[:section]).for_category(params[:category]).limit(75).includes(:page)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @posts }

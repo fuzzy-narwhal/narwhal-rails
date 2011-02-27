@@ -35,6 +35,10 @@ def Event.current(category)
   end
   find_by_sql([sql,DateTime.now])
 end
+
+def post
+  Post.find_by_post_id(post_id)
+end
 end
 =begin
 select events.* from events,pages,categories_pages,categories

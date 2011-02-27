@@ -1,6 +1,6 @@
-<h2>Events - All</h2>
+<h2><%=@category_name%> Events</h2>
 <%@events.each{|event|%>
- <div style='width:310px;border-top:2px solid black;margin-top:6px;padding-top:6px'>
+ <div style='width:310px;border-bottom:1px solid black;margin-top:6px;padding-top:6px'>
    <div style='font-weight:bold;color:green;padding-bottom:4px'><%=event.name%> </div>
      <!--<a href='http://www.facebook.com?event.php?eid=<%=event.event_id%>'>-->
    <div style='font-weight:normal;color:green;padding-bottom:4px'><%=event.location%></div>

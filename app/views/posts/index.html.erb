@@ -30,7 +30,7 @@
 <!-- center column -->
 <div id="feed">
 
-    <h2> All News </h2>
+    <h2> <%=@category_name%> Updates</h2>
     <ul>
       <% @posts.each do |post| %>
       <li>
@@ -40,7 +40,15 @@
         <div class="text-right">
           <h3><%= link_to post.page.name, post.page.link if post.page.link %></h3>
           <div class="message"> <%= post.message unless post.message.nil? %> </div>
-          <div class="timestamp"> <%= time_ago_in_words post.created_time %> </div>
+          <div class="timestamp"> 
+          <%if post.icon%>
+          <span style='vertical-align:-2px'>
+            <img src='<%=post.icon%>'/>
+            </span>
+          <%end%>
+          Posted <%= time_ago_in_words post.created_time %> ago
+          
+          </div>
         </div>
       </li>
       <% end %>
@@ -51,7 +59,8 @@
 
 <!-- right column -->
 <div id="widgets">
-<p>   <%=render(:partial=>'events')%> </p>
+
+  <%=render(:partial=>'events_one_line')%> 
 
 </div><!-- end widgets-->
 
