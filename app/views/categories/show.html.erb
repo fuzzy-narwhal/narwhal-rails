@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%=@category.name%></h1>
+
+<%= render :partial=>"/pages/details" ,:collection=>@category.pages, :as=>:page, :locals=>{:image_type=>:square} %>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

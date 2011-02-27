@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Page:</b>
-  <%= @page.page_id %>
-</p>
+<%= render :partial=>"details", :locals=>{:page=>@page, :image_type=>:large} %>
 
 <p>
 	<table>

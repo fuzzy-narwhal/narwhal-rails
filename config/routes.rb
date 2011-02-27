@@ -1,13 +1,15 @@
 NarwhalRails::Application.routes.draw do
-  resources :pages
-
-  resources :posts
   
+  get 'categories/autocomplete_category_name'
+  resources :pages
+  resources :posts
+  resources :categories
   root :to => 'pages#index'
   match 'gallery.html', :to => 'pages#gallery'
   match 'entity.html', :to => 'pages#entity'
   match 'entity-recommended.html', :to => 'pages#entity-recommended'
   match 'entity-transitioned.html', :to => 'pages#entity-transitioned'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
