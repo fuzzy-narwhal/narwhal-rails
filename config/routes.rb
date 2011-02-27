@@ -1,7 +1,5 @@
 NarwhalRails::Application.routes.draw do
-  
   devise_for :users
-
   resources :sections
 
   get 'categories/autocomplete_category_name'
