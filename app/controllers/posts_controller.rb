@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = Post.recent.limit(10)
-    @events = Event.current
+    @posts = Post.recent.limit(100)
+    @events = Event.current(params[:category])
     if name = params[:category]
       category = Category.find_by_name(name.downcase)
       @posts = Post.recent.for_category(category.id)
