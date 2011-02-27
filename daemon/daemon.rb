@@ -103,6 +103,7 @@ def save_posts(page, url)
       post[:created_time] = j['created_time']
       post[:updated_time] = j['updated_time']
       post[:typ] = j['type']
+      post[:page_id] = page.page_id
 
       if j.has_key? 'likes'
         post[:likes] = j['likes']['count']
@@ -218,22 +219,24 @@ def import_pages(filename)
     puts "can't find file"
   end
   puts text.size
-  lines = text.split(/$/)
+  lines = text.split
   puts lines.size
   lines.each{|line|
     begin
       tokens = line.split(",")
       page_id = tokens[0]
       categories = tokens[1]
+      puts "#{page_id} #{categories}"
       unless Page.find_by_page_id(page_id)
         page = Page.new
         page.page_id=page_id.strip
         page.category_tags=categories
         page.save
-        puts page_id+" "+categories
+ #       puts page_id+" "+categories
       end
     rescue =>e
-      puts e.message  
+      puts e.message
+#      puts e.backtrace.join("\n")  
     end
   }
 end
@@ -279,21 +282,21 @@ def main(args)
     $debug=true if args.index("debug")
     @logger = Logger.new("daemon.log")
     @logger.level = Logger::DEBUG
-    if _crawl_pages
-      header "crawling pages"
-      crawl_pages
-    end
-    if _process_events
-      header "processing events"
-      process_events
-    end
     if _import_pages
       header "importing pages"
       import_pages(filename)
     end
+    if _crawl_pages
+      header "crawling pages"
+      crawl_pages
+    end
     if _crawl_posts
       header "crawling posts"
       crawl_posts
+    end
+    if _process_events
+      header "processing events"
+      process_events
     end
     
 

@@ -7,7 +7,7 @@ class AddVenueToEvents < ActiveRecord::Migration
     add_column :events, :venue_latitude, :string
     add_column :events, :venue_longitude, :string
     remove_column :events, :startime
-    remove_column :events, :end_time
+    remove_column :events, :endtime
     add_column :events, :start_time, :datetime
     add_column :events, :end_time, :datetime
   end
