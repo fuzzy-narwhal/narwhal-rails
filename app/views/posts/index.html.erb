@@ -13,12 +13,16 @@
   </div><!--end container -->
 </div><!-- end nav -->
 
-<div class="container">
+<div id="main" class="container">
 
 
 <!-- left hand column -->
 <div id="filter">
-
+<h2>Categories </h2>
+<ul>
+  <li><input type="checkbox" name="filter1" value="Car" /> filter </li>
+  <li><input type="checkbox" name="filter2" value="Car" /> filter </li>
+</ul>
 </div><!-- end filter-->
 
 
@@ -35,7 +39,7 @@
         <div class="text-right">
           <span class="feed-title"><%= link_to post.page.name, post.page.link if post.page.link %></span>
           <div class="feed-body">
-	 <%= post.message unless post.message.nil? %>
+	          <%= post.message unless post.message.nil? %>
          </div>
         </div>
       </li>
@@ -47,7 +51,7 @@
 
 <!-- right column -->
 <div id="widgets">
-
+<p> tehehe </p>
 
 </div><!-- end widgets-->
 
