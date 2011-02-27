@@ -6,6 +6,7 @@ NarwhalRails::Application.routes.draw do
   resources :categories
   root :to => 'pages#index'
 
+  match 'pretty_posts' => 'posts#pretty_posts'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

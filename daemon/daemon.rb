@@ -100,6 +100,9 @@ def save_posts(page, url)
       post[:movie_url] = j['source']
       post[:icon] = j['icon']
       post[:attribution] = j['attribution']
+      post[:created_time] = j['created_time']
+      post[:updated_time] = j['updated_time']
+      post[:typ] = j['type']
 
       if j.has_key? 'likes'
         post[:likes] = j['likes']['count']
@@ -112,7 +115,7 @@ def save_posts(page, url)
       if j.has_key? 'comments'
         post[:comments] = j['comments']['count']
       end
-
+      post.page_id=page.id
       post.save!
       count = count + 1
     else
@@ -121,41 +124,122 @@ def save_posts(page, url)
     
     puts count.to_s + ' posts saved'
   end
+end
+
+=begin
+{
+   "id": "144301898918054",
+   "owner": {
+      "name": "Coolidge Corner",
+      "category": "Local business",
+      "id": "91650683998"
+   },
+   "name": "Coolidge Corner Sidewalk Sale",
+   "description": "Come to Coolidge Corner this weekend to get amazing deals at 25 different local businesses. The fun starts at 10am on Saturday and continues on Sunday. \n\nHere's the list of participating businesses:\nBeauty and Style (Saturday only)\nBrookline Bank (Saturday only)\nBrookline Booksmith\nBrookline Chamber of Commerce (Saturday only)\nBrookline Food Pantry\nBrookline Teen Center\nDelaria Salon\nEureka Puzzles\nMagic Beans\nCause to Paws\nEva B Consignment (Saturday only)\nFinale\nFire Opal\nGourmet Curry House\nHair by Dennis (Saturday only)\nMattei Galleria (Saturday only)\nMint Julep\nEden ~ Spa for Well-being\nMelt\nParty Favors\nPear Tree\nRosaline's Skin Care\nSimons Shoes\nVintage\nWainwright Bank (Saturday only)",
+   "start_time": "2010-07-17T10:00:00",
+   "end_time": "2010-07-18T16:00:00",
+   "location": "Coolidge Corner",
+   "privacy": "OPEN",
+   "updated_time": "2010-07-16T12:18:39+0000"
+}
+=end
+
+def load_and_save_event(post,eid)
+  graph_url = 'https://graph.facebook.com/' + page.page_id
+  response = RestClient.get(graph_url)
+  json = JSON.parse(response)
   
-  
+  json['data'].each do |j|
+  end
+end
+
+def process_events
+  Post.find_with_events.each{|post|
+    event_url = post.link_url
+    eid = event_url=~/\d+/
+    load_and_save_event(post,eid)
+    }
+end
+
+def import_pages(filename)
+  if File.exists?(filename)
+    text =  File.read(filename)
+  else
+    puts "can't find file"
+  end
+  puts text.size
+  lines = text.split(/$/)
+  puts lines.size
+  lines.each{|line|
+    begin
+      tokens = line.split(",")
+      page_id = tokens[0]
+      categories = tokens[1]
+      unless Page.find_by_page_id(page_id)
+        page = Page.new
+        page.page_id=page_id.strip
+        page.category_tags=categories
+        page.save
+        puts page_id+" "+categories
+      end
+    rescue =>e
+      puts e.message  
+    end
+  }
 end
 
 def crawl_pages
   Page.find(:all).each do |page|
-    puts 'working on ' + page.page_id
-    save_page(page)
-    puts page.name
+    begin
+      puts 'working on ' + page.page_id
+      save_page(page)
+      puts page.name
+    rescue =>e
+      puts e.message  
+    end
   end
 end
 
 def crawl_posts
   Page.find(:all).each do |page|
-    facebook_url = 'https://graph.facebook.com/' + page.page_id + '/posts'
-    puts 'working on ' + facebook_url
-    save_page(page)
-    save_posts page, facebook_url
+    begin
+      facebook_url = 'https://graph.facebook.com/' + page.page_id + '/posts'
+      puts 'working on ' + facebook_url
+#      save_page(page)
+      save_posts page, facebook_url
+    rescue =>e
+      puts e.message  
+    end
   end
-      
 end
 
 def main(args)
   begin
     _crawl_posts = false
     _crawl_pages = false
+    _import_pages = false
+    _import_pages = false
+    _process_events = false
     $debug = false;
     _crawl_posts=true if args.index("crawl_posts")
     _crawl_pages=true if args.index("crawl_pages")
+    _import_pages=true if args.index("import_pages")
+    _process_events=true if args.index("process_events")
+    filename = args[1]
     $debug=true if args.index("debug")
     @logger = Logger.new("daemon.log")
     @logger.level = Logger::DEBUG
     if _crawl_pages
       header "crawling pages"
       crawl_pages
+    end
+    if _process_events
+      header "processing events"
+      process_events
+    end
+    if _import_pages
+      header "importing pages"
+      import_pages(filename)
     end
     if _crawl_posts
       header "crawling posts"
@@ -184,9 +268,9 @@ end
 
 # program entry point
 if (!ARGV.index("help").nil? or ARGV.empty?)
-  puts "Narwhwal Daemon"
+  puts "Narwhal Daemon"
   puts <<-S
-    Usage: ruby narwhal.rb (crawl_pages | crawl_posts)
+    Usage: ruby narwhal.rb (crawl_pages | crawl_posts | import_pages <filepath> | process_events)
     S
   puts "(c) Fuzzy Narwhal Feb 2011"
   exit

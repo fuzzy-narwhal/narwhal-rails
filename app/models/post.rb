@@ -1,5 +1,9 @@
 class Post < ActiveRecord::Base
   belongs_to :page
+
+  def find_with_events
+    Post.find_by_sql('select * from posts where link_url like "http://www.facebook.com/event.php?eid=%"')
+  end
 end
 
 

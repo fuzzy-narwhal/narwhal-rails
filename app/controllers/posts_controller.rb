@@ -10,6 +10,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def pretty_posts
+    @posts = Post.all(:order=>'created_time desc',:limit=>params[:limit]||100)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @posts }
+    end
+  end
+
   # GET /posts/1
   # GET /posts/1.xml
   def show

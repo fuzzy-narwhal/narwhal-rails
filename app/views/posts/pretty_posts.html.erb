@@ -1,0 +1,28 @@
+<h1>Listing posts</h1>
+
+<table width=800 cellpadding=2>
+
+<% @posts.each do |post| %>
+<tr style='border-top:2px solid black'>
+    <%if post.page.picture%>
+    <td valign=top><img src='<%=post.page.picture%>' width=48px/></td>
+    <%else%>
+    <td style='width:48px'></td>
+    <%end%>
+    <td valign=top>
+    <b><%=post.page.name%></b>
+    <%= image_tag post.icon unless post.icon.nil? %><%= post.link_description unless post.link_description.nil? %>
+      <%= post.link_caption unless post.link_caption.nil? %>
+<%= link_to post.link_name, post.link_url unless post.link_url.nil? %>      <%= post.message %><br>
+    type:<%=post.type%><br>
+    <%= post.attribution %> <%= post.likes %> <%= post.created_time %>
+    <%= link_to post.movie_url unless post.movie_url.nil? %></td>
+    <%if post.picture%>
+    <td valign=center><img src='<%=post.picture%>' width=48px/></td>
+    <%else%>
+    <td style='width:48px'></td>
+    <%end%>
+    
+</tr>
+<% end %>
+</table>
