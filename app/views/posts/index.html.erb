@@ -28,8 +28,9 @@
 <div id="filter">
 <h2>Categories </h2>
 <ul>
-  <li><input type="checkbox" name="filter1" value="Car" /> filter </li>
-  <li><input type="checkbox" name="filter2" value="Car" /> filter </li>
+  <% @category_tags.each do |tag| %>
+    <li><%= category_link(tag) %></li>
+  <% end %>
 </ul>
 </div><!-- end filter-->
 
@@ -53,7 +54,6 @@
             </span>
           <%end%>
           Posted to <a href='http://www.facebook.com/<%=post.page.link%>'>Facebook</a> <%= time_ago_in_words post.created_time %> ago
-          
           </div>
         </div>
       </li>

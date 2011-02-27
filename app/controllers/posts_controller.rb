@@ -18,9 +18,14 @@ class PostsController < ApplicationController
   # GET /posts.xml
   def index
     section = params[:section]
-    @category_name=(section||"recent").capitalize
-    @posts = Post.recent.for_section(params[:section]).for_category(params[:category]).limit(75).includes(:page)
-    @events = Event.recent.for_section(params[:section]).for_category(params[:category]).limit(75).includes(:page)
+  @category_name=(section||"recent").capitalize
+    
+    posts_scope = Post.recent.for_section(params[:section])
+    @posts = posts_scope.for_category(params[:category]).limit(75).includes(:page)
+    @events = Event.for_section(params[:section]).for_category(params[:category]).limit(75).includes(:page)
+    
+    category_tag_ids = posts_scope.joins(:page=>:categories_pages).group("category_id").order("count(*)").select("category_id").limit(10).map(&:category_id)
+    @category_tags = Category.find(category_tag_ids).map(&:name)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @posts }
