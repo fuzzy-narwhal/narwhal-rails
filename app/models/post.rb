@@ -5,6 +5,12 @@ class Post < ActiveRecord::Base
     Post.find_by_sql('select * from posts where link_url like "http://www.facebook.com/event.php?eid=%"')
   end
   
+  # Generate the url for the actual post on Facebook
+  def post_url
+    info = self.post_id.split('_')
+    "http://facebook.com/#{info[0]}/posts/#{info[1]}"
+  end
+  
   scope :recent, order("created_time desc")
   
   scope :for_section, lambda {|section|
