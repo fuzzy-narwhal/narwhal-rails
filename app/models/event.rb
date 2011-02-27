@@ -6,13 +6,15 @@ class Event < ActiveRecord::Base
   }
 
   scope :for_section, lambda {|section|
-    if section && section = Section.find_by_name_or_id(section)
+    if section
+      section = Section.find_by_name_or_id(section) || 0
       joins(:page).where(:pages=>{:section_id=>section})
     end
   }
   
   scope :for_category, lambda {|category|
-    if category && category = Category.find_by_name_or_id(category)
+    if category
+      category = Category.find_by_name_or_id(category) || 0
       joins(:page=>:categories_pages).where(:categories_pages=>{:category_id=>category})
     end
   }
