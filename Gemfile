@@ -6,8 +6,6 @@ gem 'rest-client'
 gem 'json' 
 gem 'rails3-jquery-autocomplete'
 
-
-
 group :development, :test do
   gem 'rspec-rails'
   gem 'annotate'
