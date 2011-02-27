@@ -4,6 +4,10 @@ NarwhalRails::Application.routes.draw do
   resources :posts
   
   root :to => 'pages#index'
+  match 'gallery.html', :to => 'pages#gallery'
+  match 'entity.html', :to => 'pages#entity'
+  match 'entity-recommended.html', :to => 'pages#entity-recommended'
+  match 'entity-transitioned.html', :to => 'pages#entity-transitioned'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
