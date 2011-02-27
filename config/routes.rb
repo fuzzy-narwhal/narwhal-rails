@@ -6,7 +6,7 @@ NarwhalRails::Application.routes.draw do
   resources :pages
   resources :posts
   resources :categories
-  root :to => 'pages#index'
+  root :to => 'posts#index'
   match 'gallery.html', :to => 'pages#gallery'
   match 'entity.html', :to => 'pages#entity'
   match 'entity-recommended.html', :to => 'pages#entity-recommended'
