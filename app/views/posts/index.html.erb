@@ -2,13 +2,14 @@
 <div id="nav">
   <div class="container">
   <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Art</a></li>
-    <li><a href="#">Theater</a></li>
-    <li><a href="#">Music</a></li>
-    <li><a href="#">Movies</a></li>
-    <li><a href="#">History</a></li>
-    <li><a href="#">Educational</a></li>
+    <li><a href="/">Home</a></li>
+    <li><%= section_link "Art" %></li>
+    <li><%= section_link "Theater" %></li>
+    <li><%= section_link "Music" %></li>
+    <li><%= section_link "Movies" %></li>
+    <li><%= section_link "History" %></li>
+    <li><%= section_link "Educational" %></li>
+    <li><%= section_link "Food" %></li>
   </ul>
   </div><!--end container -->
 </div><!-- end nav -->
@@ -20,8 +21,9 @@
 <div id="filter">
 <h2>Categories </h2>
 <ul>
-  <li><input type="checkbox" name="filter1" value="Car" /> filter </li>
-  <li><input type="checkbox" name="filter2" value="Car" /> filter </li>
+  <% @category_tags.each do |tag| %>
+    <li><%= category_link(tag) %></li>
+  <% end %>
 </ul>
 </div><!-- end filter-->
 
@@ -29,7 +31,7 @@
 <!-- center column -->
 <div id="feed">
 
-    <h2> All News </h2>
+    <h2> <%=@category_name%> Updates</h2>
     <ul>
       <% @posts.each do |post| %>
       <li>
@@ -39,7 +41,15 @@
         <div class="text-right">
           <h3><%= link_to post.page.name, post.page.link if post.page.link %></h3>
           <div class="message"> <%= post.message unless post.message.nil? %> </div>
-          <div class="timestamp"> <%= time_ago_in_words post.created_time %> </div>
+          <div class="timestamp"> 
+          <%if post.icon%>
+          <span style='vertical-align:-2px'>
+            <img src='<%=post.icon%>'/>
+            </span>
+          <%end%>
+          <%= link_to "Posted #{time_ago_in_words post.created_time} ago", post.post_url %>
+          
+          </div>
         </div>
       </li>
       <% end %>
@@ -50,8 +60,8 @@
 
 <!-- right column -->
 <div id="widgets">
-<p>   <%=render(:partial=>'events')%> </p>
-<p>   <%=render(:partial=>'pages/pages')%> </p>
+  <%=render(:partial=>'events_one_line')%>
+  <%=render(:partial=>'pages/pages')%>
 </div><!-- end widgets-->
 
 </div> <!-- end container -->

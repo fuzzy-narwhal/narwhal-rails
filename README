@@ -1,1 +1,11 @@
 WE ARE FUZZY NARWHALS. 
+
+To Create a user
+================
+
+rails c
+user = User.create! do |u|
+  u.email = 'some.email@some.server.com'
+  u.password = 'password'
+  u.password_confirmation = 'password'
+end

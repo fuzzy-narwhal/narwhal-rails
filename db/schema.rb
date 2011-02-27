@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110227041421) do
+ActiveRecord::Schema.define(:version => 20110227171426) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -18,12 +18,17 @@ ActiveRecord::Schema.define(:version => 20110227041421) do
     t.datetime "updated_at"
   end
 
+  add_index "categories", ["name"], :name => "index_categories_on_name"
+
   create_table "categories_pages", :force => true do |t|
     t.integer  "category_id"
     t.integer  "page_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "categories_pages", ["category_id", "page_id"], :name => "index_categories_pages_on_category_id_and_page_id"
+  add_index "categories_pages", ["page_id", "category_id"], :name => "index_categories_pages_on_page_id_and_category_id"
 
   create_table "events", :force => true do |t|
     t.integer  "event_id"
@@ -44,6 +49,8 @@ ActiveRecord::Schema.define(:version => 20110227041421) do
     t.datetime "start_time"
     t.datetime "end_time"
   end
+
+  add_index "events", ["page_id"], :name => "index_events_on_page_id"
 
   create_table "pages", :force => true do |t|
     t.string   "page_id"
@@ -66,6 +73,8 @@ ActiveRecord::Schema.define(:version => 20110227041421) do
     t.string   "phone"
     t.integer  "section_id"
   end
+
+  add_index "pages", ["section_id"], :name => "index_pages_on_section_id"
 
   create_table "posts", :force => true do |t|
     t.integer  "likes"
@@ -90,10 +99,33 @@ ActiveRecord::Schema.define(:version => 20110227041421) do
     t.string   "typ"
   end
 
+  add_index "posts", ["page_id"], :name => "index_posts_on_page_id"
+
   create_table "sections", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "sections", ["name"], :name => "index_sections_on_name"
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                               :default => "", :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
+    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "reset_password_token"
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                       :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

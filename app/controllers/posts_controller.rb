@@ -1,13 +1,28 @@
 class PostsController < ApplicationController
+  
+  before_filter :authenticate_user! unless :index
+  
   # GET /posts
   # GET /posts.xml
   def index
+<<<<<<< HEAD
     @posts = Post.recent.limit(5)
     @events = Event.current(params[:category])
     if name = params[:category]
       category = Category.find_by_name(name.downcase)
       @posts = Post.recent.for_category(category.id)
     end
+=======
+    section = params[:section]
+    @category_name=(section||"all").capitalize
+    
+    posts_scope = Post.recent.for_section(params[:section])
+    @posts = posts_scope.for_category(params[:category]).limit(75).includes(:page)
+    @events = Event.for_section(params[:section]).for_category(params[:category]).limit(75).includes(:page)
+    
+    category_tag_ids = posts_scope.joins(:page=>:categories_pages).group("category_id").order("count(*)").select("category_id").limit(10).map(&:category_id)
+    @category_tags = Category.find(category_tag_ids).map(&:name)
+>>>>>>> 90a7806693df2c57cdea3498e8c230a141c1df57
     
     @pages = Page.get_recommendations(category)
     

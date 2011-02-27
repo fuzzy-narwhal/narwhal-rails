@@ -1,8 +1,11 @@
 class PagesController < ApplicationController
+  
+  before_filter :authenticate_user!
+  
   # GET /pages
   # GET /pages.xml
   def index
-    @pages = Page.all
+    @pages = Page.includes(:categories).all
 
     respond_to do |format|
       format.html # index.html.erb
