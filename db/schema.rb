@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110227020223) do
+ActiveRecord::Schema.define(:version => 20110227041421) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -23,6 +23,26 @@ ActiveRecord::Schema.define(:version => 20110227020223) do
     t.integer  "page_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "events", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "page_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "location"
+    t.string   "privacy"
+    t.datetime "updated_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "venue_street"
+    t.string   "venue_city"
+    t.string   "venue_state"
+    t.string   "venue_country"
+    t.string   "venue_latitude"
+    t.string   "venue_longitude"
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "pages", :force => true do |t|

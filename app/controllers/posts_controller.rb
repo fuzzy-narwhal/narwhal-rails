@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = Post.recent
-    
+    @posts = Post.recent.limit(100)
+    @events = Event.current(params[:category])
     if name = params[:category]
       category = Category.find_by_name(name.downcase)
       @posts = Post.recent.for_category(category.id)
@@ -13,6 +13,10 @@ class PostsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @posts }
     end
+  end
+
+  def events
+    
   end
 
   def pretty_posts

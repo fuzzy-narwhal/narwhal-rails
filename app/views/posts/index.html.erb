@@ -1,4 +1,58 @@
 
-<div style="width: 500px">
-  <%= render :partial=>"posts/thumbnail", :collection=>@posts, :as=>:post %>
-</div>
+<div id="nav">
+  <div class="container">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Art</a></li>
+    <li><a href="#">Theater</a></li>
+    <li><a href="#">Music</a></li>
+    <li><a href="#">Movies</a></li>
+    <li><a href="#">History</a></li>
+    <li><a href="#">Educational</a></li>
+  </ul>
+  </div><!--end container -->
+</div><!-- end nav -->
+
+<div id="main" class="container">
+
+
+<!-- left hand column -->
+<div id="filter">
+<h2>Categories </h2>
+<ul>
+  <li><input type="checkbox" name="filter1" value="Car" /> filter </li>
+  <li><input type="checkbox" name="filter2" value="Car" /> filter </li>
+</ul>
+</div><!-- end filter-->
+
+
+<!-- center column -->
+<div id="feed">
+
+    <h2> All News </h2>
+    <ul>
+      <% @posts.each do |post| %>
+      <li>
+        <div class="image-left">
+          <%= image_tag post.page.profile_picture_url, :width => 64, :height => 64 %>
+        </div>
+        <div class="text-right">
+          <h3><%= link_to post.page.name, post.page.link if post.page.link %></h3>
+          <div class="message"> <%= post.message unless post.message.nil? %> </div>
+          <div class="timestamp"> <%= time_ago_in_words post.created_time %> </div>
+        </div>
+      </li>
+      <% end %>
+
+    </ul>
+
+</div><!-- end feed-->
+
+<!-- right column -->
+<div id="widgets">
+<p>   <%=render(:partial=>'events')%> </p>
+
+</div><!-- end widgets-->
+
+</div> <!-- end container -->
+

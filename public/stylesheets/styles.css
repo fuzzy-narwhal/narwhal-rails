@@ -1,261 +1,172 @@
-/*------------------------------------*\
-  RESET
-\*------------------------------------*/
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0b1 | 201101
-   NOTE:WORK IN PROGRESS
-   USE WITH CAUTION AND TEST WITH ABANDON */
-
-html,body,div,span,applet,object,iframe,
-h1,h2,h3,h4,h5,h6,p,blockquote,pre,
-a,abbr,acronym,address,big,cite,code,
-del,dfn,em,img,ins,kbd,q,s,samp,
-small,strike,strong,sub,sup,tt,var,
-b,u,i,center,
-dl,dt,dd,ol,ul,li,
-fieldset,form,label,legend,
-table,caption,tbody,tfoot,thead,tr,th,td,
-article,aside,canvas,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section,summary,
-time,mark,audio,video{
-  margin:0;
-  padding:0;
-  border:0;
-  outline:0;
-  font-size:100%;
-  font:inherit;
-  vertical-align:baseline;
-  font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-}
-/* HTML5 display-role reset for older browsers */
-article,aside,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section{
-  display:block;
-}
-body{
-  line-height:1;
-}
-ol,ul{
-  list-style:none;
-}
-blockquote,q{
-  quotes:none;
-}
-blockquote:before,blockquote:after,
-q:before,q:after{
-  content:'';
-  content:none;
-}
-/* remember to define visible focus styles!
-:focus{
-  outline:?????;
-} */
-
-/* remember to highlight inserts somehow! */
-ins{
-  text-decoration:none;
-}
-del{
-  text-decoration:line-through;
+body {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  background: #fff;
 }
 
-table{
-  border-collapse:collapse;
-  border-spacing:0;
-}
-
-/*------------------------------------*\
-  MAIN
-\*------------------------------------*/
-#container
-{
-  width: 960px;
-  margin: 20px auto;
-  background-color: #fff;
-}
-
-#headline
-{
-  float: left;
-  width: 540px;
-}
-
-#headlinePicture
-{
-  float: right;
-  width: 400px;
-  padding-left:20px;
-}
-
-#headline h1
-{
-  font-size: 48px;
-  font-weight: 900;
-  font-style: italic;
-  letter-spacing:-2px;
-  margin: 20px 0;
-  text-shadow: #aaa 1px 1px 2px;
-}
-
-#headline h2
-{
-  font-size: 24px;
-  font-weight: 100;
-  letter-spacing:-1px;
-  line-height: 36px;
-  margin: 20px 0;
-  text-shadow: #aaa 1px 1px 2px;
-}
-
-#headline p
-{
-  letter-spacing: -1px;
-  line-height: 24px;
-  text-shadow: #aaa 1px 1px 2px;
-}
-
-#facebookConnect
-{
-  margin: 20px auto;
-  float: right;
-}
-
-#dialog
-{
-  background-color:white;
-  color:#333;
-  margin:20px;
-}
-
-header
-{
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  height: 60px;
-}
-
-#logo h1
-{
-  font-weight:900;
-  font-size: 36px;
-  float: left;
-  margin-top: -10px;
-  margin-right: 20px;
-  padding-bottom: 20px;
-  text-shadow: #999 1px 1px 2px;
-}
-
-#logoheadline
-{
-  background-color: #a73300;
-  font-style: italic;
-  text-shadow: #672000 1px 1px 2px;
-  padding: 10px;
-}
-
-#login ul 
-{
-  margin: 0 auto;
-}
-
-#login ul li
-{
-  float: right;
-  margin-left: 10px;
-}
-
-#login a
-{
-  color: #0070cc;
-}
-
-#logo
-{
-  display: inline;
-  padding: 20px 0 0;
-  float: left;
-  width: 50%;
-}
-
-#login
-{
-  float: right;
-  width: 50%;
-  padding-top: 20px;
-}
-
-#primary-content ul li
-{
-  float: left;
-  padding: 20px 0;
-  border-bottom: 1px solid #808080;
-}
-
-nav
-{
-  text-align: left;
-  border-top: 2px solid #a6a6a6;
+#header {
   width: 100%;
-  background-color: #eaeaea;
-  height: 60px;
+  background: url('../images/header_slice.png') #fff repeat-x;
+  height: 65px;
 }
 
-nav ul
-{
-  padding-left: 20px;
+#logo {
+  padding-top: 12px;
+}
+
+#nav {
+  width: 100%;
+  height: 27px;
+  background: #ccc repeat-x;
+}
+
+#nav ul li {
+  float: left;
+  height: 27px;
+}
+
+
+#nav a:link, #nav a:visited {
+  color: #333;
+  font-size: 15px;
+  text-shadow: 0px 1px #ededed;
+  text-decoration: none;
+  display: block;
+  height: 21px;
+  padding: 6px 15px 0px 15px;
+}
+
+#nav a:hover {
+  color: #fff;
+  text-shadow: 0px 1px #d65158;
+  text-decoration: none;
+  background-color: #a73300;
+  height: 21px;
+  padding: 6px 15px 0px 15px;
+}
+
+.container {
+  width: 960px;
   margin: 0 auto;
 }
 
-nav ul li
-{
+#main {
+  padding-top: 40px;
+}
+
+/* left column */
+
+#filter {
+  width: 140px;
+  padding-right: 10px;
   float: left;
-  padding: 20px;
-  color: #333;
+}
+
+#filter h2 {
+  color: #808080;
+  font-size: 18px;
+  font-weight: bold;  
+}
+
+#filter ul {
+  padding: 5px 0px;
+  margin: 0;
+}
+
+#filter li {
+  font-weight: regular;
+  color: #808080;
   font-size: 14px;
-  text-shadow: #999 1px 1px 2px;
+  padding: 5px 0px;
 }
 
-#primary-content
-{
-  width: 50%;
-  position: relative;
-  overflow: hidden;
-}
+/* middle column */
 
-#primary-content-header
-{
-  border-bottom: 2px solid #a73300;
-  padding: 20px 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 36px;
-  font-weight: 900;
-}
-
-.image-left
-{
+#feed {
+  width: 459px;
+  padding: 0px 10px 0px 20px;
   float: left;
-  margin-right: 20px;
-  width: 50px;
+  border-left: 1px solid #ccc;
 }
 
-.text-right
-{
-  float: right;
-  width: 410px;
-}
-
-.feed-title
-{
+#feed h2 {
   font-size: 24px;
-  font-weight: 100;
-  line-height: 36px;
-  text-shadow: #a6a6a6 1px 1px 2px;
+  font-weight: bold;
+  color: #000;
+  border-bottom: 2px solid #a73300; 
+  width: 100%;
 }
 
-.feed-body
-{
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 21px;
+#feed li .image-left {
+  margin: 10px 0px;
+  padding-left: 2px;
+  padding-top: 2px;
+  width: 66px;
+  height: 66px;
+  /*-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;*/
+  border: 1px solid #eee;
+  -moz-box-shadow: 0px 0px 3px #000, 2px 2px 3px #000;
+  -webkit-box-shadow: 0px 0px 3px #000, 2px 2px 3px #000; 
+  box-shadow: 0px 0px 3px #000, 2px 2px 3px #000;
+  float: left;
 }
+
+#feed li h3 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+}
+
+#feed li h3 a {
+  text-decoration: none;
+}
+
+#feed li h3 a:visited {
+  text-decoration: none;
+  color: #000;
+}
+
+#feed li h3 a:hover {
+  color: #a73300;
+  text-decoration: underline;
+  background-color: transparent;
+}
+
+#feed li .text-right {
+  padding-top: 10px;
+  margin-left: 84px;
+}
+
+#feed li {
+  clear: both;
+  border-top: 1px solid #808080;
+}
+
+#feed li:first-child {
+  border: none;
+}
+
+#feed li .text-right .message {
+  font-size: 10px;
+  padding: 5px 0px;
+  font-weight: regular;
+}
+
+#feed li .text-right .timestamp {
+  font-size: 10px;
+  padding: 5px 0px;
+  font-weight: regular;
+  color: #808080;
+}
+
+/*right column */
+
+#widgets {
+  width: 310px;
+  padding-left: 10px;
+  float: left;
+}
+
+
+

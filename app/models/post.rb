@@ -1,11 +1,11 @@
 class Post < ActiveRecord::Base
   belongs_to :page
 
-  def find_with_events
+  def Post.find_with_events
     Post.find_by_sql('select * from posts where link_url like "http://www.facebook.com/event.php?eid=%"')
   end
   
-  scope :recent, order("created_time desc")
+  scope :recent, order("created_time desc").limit(100)
   
   scope :for_category, lambda {|category|
     category = Category.find_by_name(category.downcase) if category.is_a?(String)

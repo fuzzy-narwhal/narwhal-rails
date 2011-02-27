@@ -103,6 +103,7 @@ def save_posts(page, url)
       post[:created_time] = j['created_time']
       post[:updated_time] = j['updated_time']
       post[:typ] = j['type']
+      post[:page_id] = page.page_id
 
       if j.has_key? 'likes'
         post[:likes] = j['likes']['count']
@@ -142,21 +143,71 @@ end
    "privacy": "OPEN",
    "updated_time": "2010-07-16T12:18:39+0000"
 }
+
+{
+   "id": "128181030587904",
+   "owner": {
+      "name": "Regent Theatre Arlington",
+      "category": "Local business",
+      "id": "293881312777"
+   },
+   "name": "Bellyqueen:  Journeys along the Silk Road",
+   "description": "**Bellyqueen\n~Journeys along the Silk Road\n\nFriday Mar. 18, 8:00PM\nTickets: Reserved Seating\n$17 in advance, $20 day of show\nphone/online orders include additional service charge\n{781} 646-4849\n\nTickets: Reserved Seating\n$17 in advance, $20 day of show\nphone/online orders include additional service charge\n\nSpecial $50 Dinner / Show Package with Tryst Restaurant available by calling the box office 781-646-4849. \n(Please call Tryst (781) 641-2227 to make a reservation)\n**You must present your Regent Theatre ticket at Tryst on arrival at the restaurant. \n\nJourneys along the Silk Road\nConnecting Dances From East to West\n\nFor hundreds of years the Silk Road was the link between East and West. A trade route where merchants from Asia, Europe and the Middle East exchanged goods and culture.\n\nTake a journey through these exotic lands and see the dances from the rich cultures of the Silk Road encompassing Egypt, Saudi Arabia, Turkey, Central Asia and China.\n\nFeaturing Bellyqueen Dance Theater\nwith Kaeshi Chai, Elisheva, Sandralis Gines, Irina Akulenko and many more.\n\nThe evening will also include opening performances from Boston, New York, New England, New Hampshire, & Maine Based Bellydancers:  Ombellyco, Lindsey Feeney, Johara SnakeDance, Tempeststarii-Tribal, Phaedra Rose, Za-Beth\nhttp://www.za-beth.com\n\nhttp://www.youtube.com/watch?v=oFZ-vUlOWkc\n\nwww.bellyqueen.com\n\nGrande Dame \u201cViva la Diva\u201d Productions\nhttp://www.za-beth.com   http://www.youtube.com/zabeth44   Contact: zills\u0040earthlink.net \n\n\n",
+   "start_time": "2011-03-18T20:00:00",
+   "end_time": "2011-03-18T22:30:00",
+   "location": "Regent Theater",
+   "venue": {
+      "street": "7 Medford Street",
+      "city": "Arlington",
+      "state": "Massachusetts",
+      "country": "United States",
+      "latitude": 42.4153,
+      "longitude": -71.1569
+   },
+   "privacy": "OPEN",
+   "updated_time": "2011-02-22T17:34:07+0000"
+}
+
 =end
 
 def load_and_save_event(post,eid)
-  graph_url = 'https://graph.facebook.com/' + page.page_id
+  graph_url = "https://graph.facebook.com/#{eid}"
   response = RestClient.get(graph_url)
   json = JSON.parse(response)
+  event_id = json['id']
+  event = Event.find_by_event_id(event_id)
+  event = Event.new if not event
   
-  json['data'].each do |j|
+  event.event_id = event_id
+  event.page_id=json['owner']['id'] if 
+  event.name = json['name']
+  event.description = json['description']
+  event.start_time = json['start_time']
+  event.end_time = json['end_time']
+  event.privacy = json['privacy']
+  event.location = json['location']
+  if json['venue']
+    event.venue_street=json['venue']['street']
+    event.venue_city=json['venue']['city']
+    event.venue_state=json['venue']['state']
+    event.venue_country=json['venue']['country']
+    event.venue_latitude=json['venue']['latitude']
+    event.venue_longitude=json['venue']['langitude']
   end
+  puts "event: #{event.event_id} #{event.name} #{post.page.name}"
+  event.save
 end
 
 def process_events
-  Post.find_with_events.each{|post|
+
+  posts = Post.find_with_events
+  puts "found #{posts.size} posts with events"
+  posts.each{|post|
     event_url = post.link_url
-    eid = event_url=~/\d+/
+#    puts event_url
+    matches = event_url.match /\d+/
+    eid=matches[0]
+#    puts eid
     load_and_save_event(post,eid)
     }
 end
@@ -168,22 +219,24 @@ def import_pages(filename)
     puts "can't find file"
   end
   puts text.size
-  lines = text.split(/$/)
+  lines = text.split
   puts lines.size
   lines.each{|line|
     begin
       tokens = line.split(",")
       page_id = tokens[0]
       categories = tokens[1]
+      puts "#{page_id} #{categories}"
       unless Page.find_by_page_id(page_id)
         page = Page.new
         page.page_id=page_id.strip
         page.category_tags=categories
         page.save
-        puts page_id+" "+categories
+ #       puts page_id+" "+categories
       end
     rescue =>e
-      puts e.message  
+      puts e.message
+#      puts e.backtrace.join("\n")  
     end
   }
 end
@@ -229,21 +282,21 @@ def main(args)
     $debug=true if args.index("debug")
     @logger = Logger.new("daemon.log")
     @logger.level = Logger::DEBUG
-    if _crawl_pages
-      header "crawling pages"
-      crawl_pages
-    end
-    if _process_events
-      header "processing events"
-      process_events
-    end
     if _import_pages
       header "importing pages"
       import_pages(filename)
     end
+    if _crawl_pages
+      header "crawling pages"
+      crawl_pages
+    end
     if _crawl_posts
       header "crawling posts"
       crawl_posts
+    end
+    if _process_events
+      header "processing events"
+      process_events
     end
     
 
@@ -270,7 +323,7 @@ end
 if (!ARGV.index("help").nil? or ARGV.empty?)
   puts "Narwhal Daemon"
   puts <<-S
-    Usage: ruby narwhal.rb (crawl_pages | crawl_posts | import_pages <filepath> | process_events)
+    Usage: ruby daemon.rb (crawl_pages | crawl_posts | import_pages <filepath> | process_events)
     S
   puts "(c) Fuzzy Narwhal Feb 2011"
   exit
