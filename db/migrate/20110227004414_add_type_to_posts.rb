@@ -1,6 +1,6 @@
 class AddTypeToPosts < ActiveRecord::Migration
   def self.up
-    add_column :posts, :page_id, :integer
+    add_column :posts, :type, :integer
   end
 
   def self.down

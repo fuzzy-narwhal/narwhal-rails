@@ -2,6 +2,7 @@ class Page < ActiveRecord::Base
   has_many :posts
   has_many :categories_pages
   has_many :categories, :through=>:categories_pages
+  belongs_to :section
   
   before_save :store_category_tags
   

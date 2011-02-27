@@ -1,5 +1,7 @@
 NarwhalRails::Application.routes.draw do
   
+  resources :sections
+
   get 'categories/autocomplete_category_name'
   resources :pages
   resources :posts
