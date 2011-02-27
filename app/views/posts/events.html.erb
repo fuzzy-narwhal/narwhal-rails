@@ -1,0 +1,33 @@
+<h2>Events - All</h2>
+<%@events.each{|event|%>
+ <div style='width:310px;border-top:2px solid black;margin-top:6px;padding-top:6px'>
+   <div style='font-weight:bold;color:green;padding-bottom:4px'><%=event.name%> </div>
+     <!--<a href='http://www.facebook.com?event.php?eid=<%=event.event_id%>'>-->
+   <div style='font-weight:normal;color:green;padding-bottom:4px'><%=event.location%></div>
+   
+   
+   <div>
+   <div style='float:left;padding-right:4px'>
+     <img width=64px src='http://graph.facebook.com/<%=event.event_id%>/picture?type=large'/>
+     </div>
+  <div>
+  </div>
+  <div style='font-size:12px'>
+  <i><%=event.start_time.month%>/<%=event.start_time.day%>
+    <%if event.end_time-event.start_time>100000%>
+    -<%=event.end_time.month%>/<%=event.end_time.day%>
+    <%end%>
+    </i>
+  &nbsp;<%=event.description[0..200]%>
+  <div style='color:#777'>
+  <%=event.venue_street%>
+  <%if event.venue_city%>, <%=event.venue_city%><%end%>
+  <%if event.venue_latitude%>
+    <a href='http://maps.google.com/maps?&z=10&q=<%=event.venue_latitude%>+-<%=event.venue_longitude%>&ll=<%=event.venue_latitude%>+<%=event.venue_longitude%>'>map</a>
+      <%end%>
+  </div>
+  <br>
+  <div style='clear:left'></div>
+  </div>
+  </div>
+<%}%>

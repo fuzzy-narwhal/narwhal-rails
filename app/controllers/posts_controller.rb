@@ -15,6 +15,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def events
+    @events = Event.find_by_sql(["select * from events where end_time>? order by start_time asc limit 100",DateTime.now])
+    
+  end
+
   def pretty_posts
     @posts = Post.all(:order=>'created_time desc',:limit=>params[:limit]||100)
 
