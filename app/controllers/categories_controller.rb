@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+
+  before_filter :authenticate_user!
+  
   autocomplete :category, :name
 
   # GET /categories
