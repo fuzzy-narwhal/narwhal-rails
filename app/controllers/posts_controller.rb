@@ -1,12 +1,24 @@
 class PostsController < ApplicationController
   
+  def get_cookie(name)
+    cookies[name]
+  end
+  
+  def set_cookie(name,value,path="/",expires=10.years.from_now)
+    cookies[name] = {
+                          :value => value,
+                          :expires => expires,
+                          :path => path
+                    }
+  end
+
   before_filter :authenticate_user! unless :index
   
   # GET /posts
   # GET /posts.xml
   def index
     section = params[:section]
-    @category_name=(section||"all").capitalize
+    @category_name=(section||"recent").capitalize
     
     posts_scope = Post.recent.for_section(params[:section])
     @posts = posts_scope.for_category(params[:category]).limit(75).includes(:page)
@@ -22,6 +34,10 @@ class PostsController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @posts }
     end
+    
+    @show_announcement=true
+    #@show_announcement=false if get_cookie('urbaniteboston')
+    #set_cookie('urbaniteboston',true)
   end
 
   def events
