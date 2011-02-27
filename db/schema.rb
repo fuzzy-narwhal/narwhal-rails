@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(:version => 20110227041421) do
     t.integer  "page_id"
     t.string   "name"
     t.text     "description"
-    t.datetime "endtime"
     t.string   "location"
     t.string   "privacy"
     t.datetime "updated_time"

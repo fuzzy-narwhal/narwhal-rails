@@ -29,4 +29,3 @@ production:
   database: urbaniteboston_production
   username: urbaniteboston
   password: urbaniteboston
-  socket: /tmp/mysql.sock
