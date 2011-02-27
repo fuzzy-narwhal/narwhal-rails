@@ -15,6 +15,9 @@ class PostsController < ApplicationController
     category_tag_ids = posts_scope.joins(:page=>:categories_pages).group("category_id").order("count(*)").select("category_id").limit(10).map(&:category_id)
     @category_tags = Category.find(category_tag_ids).map(&:name)
     
+    # Hack to filter out types
+    @category_tags -= ['people','venues','groups']
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @posts }
