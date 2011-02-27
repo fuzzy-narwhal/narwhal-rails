@@ -8,9 +8,18 @@
 	<![endif]-->
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag 'jquery', 'jquery-ui', 'autocomplete-rails', 'rails', 'application' %>
+  <%= javascript_include_tag 'http://connect.facebook.net/en_US/all.js' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
+<div id="header">
+  <div class="container">
+  <div id="logo">
+    <%= image_tag('urbanite_boston_logo.png') %>
+    <span id="logoheadline">Explore your space.</span>
+  </div>
+  </div><!-- end container -->
+</div><!--end header-->
   <%= yield %>
 </body>
 </html>
