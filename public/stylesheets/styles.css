@@ -94,7 +94,9 @@ body {
   color: #000;
   border-bottom: 2px solid #a73300; 
   width: 100%;
+  padding-bottom:4px;
 }
+
 
 #feed li .image-left {
   margin: 10px 0px;
@@ -113,18 +115,20 @@ body {
 }
 
 #feed li h3 {
-  font-size: 14px;
+  font-size: 11px;
+	margin-bottom:2px;
   font-weight: bold;
   color: #000;
 }
 
 #feed li h3 a {
   text-decoration: none;
+  color: #333;
 }
 
 #feed li h3 a:visited {
   text-decoration: none;
-  color: #000;
+  color: #333;
 }
 
 #feed li h3 a:hover {
@@ -140,7 +144,7 @@ body {
 
 #feed li {
   clear: both;
-  border-top: 1px solid #808080;
+  border-top: 1px solid #ccc;
 }
 
 #feed li:first-child {
@@ -148,7 +152,8 @@ body {
 }
 
 #feed li .text-right .message {
-  font-size: 10px;
+  font-size: 12px;
+  line-height: 16px;
   padding: 5px 0px;
   font-weight: regular;
 }
@@ -163,10 +168,23 @@ body {
 /*right column */
 
 #widgets {
-  width: 310px;
-  padding-left: 10px;
+  border-left: 1px solid #eee;
+  width: 291px;
+  padding-left: 20px;
+margin-left:5px;
   float: left;
 }
+
+#widgets h2 {
+	font-size: 14px;
+	font-weight: bold;
+	padding-top:10px;
+	color: #888;
+	padding-bottom:4px;
+	border-bottom: 2px solid #ff3300; 
+	width: 100%;
+}
+
 
 
 

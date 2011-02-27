@@ -3,10 +3,14 @@ class PostsController < ApplicationController
   # GET /posts.xml
   def index
     @posts = Post.recent.limit(100)
-    @events = Event.current(params[:category])
-    if name = params[:category]
-      category = Category.find_by_name(name.downcase)
+    category = params[:category]
+    @category_name=(category||"all").capitalize
+    @events = Event.current(category)
+    if category
+      category = Category.find_by_name(category)
       @posts = Post.recent.for_category(category.id)
+    else
+      @posts = Post.recent
     end
     
     respond_to do |format|
