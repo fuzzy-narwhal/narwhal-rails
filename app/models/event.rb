@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  belongs_to :page
+  belongs_to :page, :primary_key=>:page_id
   
   scope :recent, lambda {
     order("start_time asc").where(["end_time>?",Time.now])
