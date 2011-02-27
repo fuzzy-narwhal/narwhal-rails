@@ -5,10 +5,12 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @sections.each do |section| %>
   <tr>
+	<td><%= section.name.titleize %></td>
     <td><%= link_to 'Show', section %></td>
     <td><%= link_to 'Edit', edit_section_path(section) %></td>
     <td><%= link_to 'Destroy', section, :confirm => 'Are you sure?', :method => :delete %></td>

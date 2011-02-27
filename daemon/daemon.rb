@@ -219,20 +219,20 @@ def import_pages(filename)
     puts "can't find file"
   end
   puts text.size
-  lines = text.split
-  puts lines.size
+  lines = text.split("\r")
   lines.each{|line|
     begin
       tokens = line.split(",")
-      page_id = tokens[0]
-      categories = tokens[1]
-      puts "#{page_id} #{categories}"
+      page_id = tokens[0].strip
+      section = tokens[1].strip.downcase
+      categories = tokens[2].split("|")
+      puts "#{page_id} #{section} #{categories}"
       unless Page.find_by_page_id(page_id)
         page = Page.new
-        page.page_id=page_id.strip
+        page.page_id=page_id
+        page.section = Section.find_by_name(section)
         page.category_tags=categories
         page.save
- #       puts page_id+" "+categories
       end
     rescue =>e
       puts e.message
