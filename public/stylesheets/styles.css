@@ -57,7 +57,7 @@ body {
 
 #filter {
   width: 150px;
-  margin-right: 10px;
+  padding-right: 10px;
   float: left;
 }
 
@@ -79,15 +79,27 @@ body {
   padding: 5px 0px;
 }
 
+/* middle column */
+
 #feed {
   width: 460px;
-  margin: 0px 10px;
+  padding: 0px 10px;
   float: left;
+  border-left: 1px solid #ccc;
 }
+
+#feed h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  border-bottom: 2px solid #a73300; 
+  width: 100%;
+}
+
 
 #widgets {
   width: 310px;
-  margin-left: 10px;
+  padding-left: 10px;
   float: left;
 }
 
