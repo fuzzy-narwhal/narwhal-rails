@@ -5,11 +5,18 @@ class Post < ActiveRecord::Base
     Post.find_by_sql('select * from posts where link_url like "http://www.facebook.com/event.php?eid=%"')
   end
   
-  scope :recent, order("created_time desc").limit(100)
+  scope :recent, order("created_time desc")
+  
+  scope :for_section, lambda {|section|
+    if section && section = Section.find_by_name_or_id(section)
+      joins(:page).where(:pages=>{:section_id=>section})
+    end
+  }
   
   scope :for_category, lambda {|category|
-    category = Category.find_by_name(category.downcase) if category.is_a?(String)
-    joins(:page=>:categories_pages).where(:categories_pages=>{:category_id=>category})
+    if category && category = Category.find_by_name_or_id(category)
+      joins(:page=>:categories_pages).where(:categories_pages=>{:category_id=>category})
+    end
   }
 end
 

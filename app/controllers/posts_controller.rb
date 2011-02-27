@@ -2,13 +2,9 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = Post.recent.limit(100)
-    @events = Event.current(params[:category])
-    if name = params[:category]
-      category = Category.find_by_name(name.downcase)
-      @posts = Post.recent.for_category(category.id)
-    end
-    
+    @posts = Post.recent.for_section(params[:section]).for_category(params[:category]).limit(50).includes(:page)
+    @events = Event.recent.for_section(params[:section]).for_category(params[:category]).limit(50).includes(:page)
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @posts }
