@@ -25,7 +25,7 @@ body {
 }
 
 
-#nav a:link, a:visited {
+#nav a:link, #nav a:visited {
   color: #333;
   font-size: 15px;
   text-shadow: 0px 1px #ededed;
@@ -82,7 +82,7 @@ body {
 /* middle column */
 
 #feed {
-  width: 460px;
+  width: 459px;
   padding: 0px 10px;
   float: left;
   border-left: 1px solid #ccc;
@@ -96,6 +96,66 @@ body {
   width: 100%;
 }
 
+#feed li .image-left {
+  margin: 10px 0px;
+  padding-left: 2px;
+  padding-top: 2px;
+  width: 66px;
+  height: 66px;
+  /*-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;*/
+  border: 1px solid #eee;
+  -moz-box-shadow: 0px 0px 3px #000, 2px 2px 3px #000;
+  -webkit-box-shadow: 0px 0px 3px #000, 2px 2px 3px #000; 
+  box-shadow: 0px 0px 3px #000, 2px 2px 3px #000;
+  float: left;
+}
+
+#feed li h3 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+}
+
+#feed li h3 a {
+  text-decoration: none;
+}
+
+#feed li h3 a:visited {
+  text-decoration: none;
+  color: #000;
+}
+
+#feed li h3 a:hover {
+  color: #a73300;
+  text-decoration: underline;
+  background-color: transparent;
+}
+
+#feed li .text-right {
+  padding-top: 10px;
+  margin-left: 84px;
+}
+
+#feed li {
+  clear: both;
+}
+
+#feed li .text-right .message {
+  font-size: 10px;
+  padding: 5px 0px;
+  font-weight: regular;
+}
+
+#feed li .text-right .timestamp {
+  font-size: 10px;
+  padding: 5px 0px;
+  font-weight: regular;
+  color: #808080;
+}
+
+/*right column */
 
 #widgets {
   width: 310px;
