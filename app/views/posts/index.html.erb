@@ -16,7 +16,14 @@
 
 <div id="main" class="container">
 
-
+<%if true #@show_announcement%>  
+<div id='announcement'>
+    Urbaniteboston.com curates the best local culture on Facebook. Immerse yourself in one of Boston's many arts scenes.
+  </div>
+<%else%>
+<div style='margin-top:20px'></div>
+<%end%>
+<%%>
 <!-- left hand column -->
 <div id="filter">
 <h2>Categories </h2>
@@ -26,11 +33,10 @@
 </ul>
 </div><!-- end filter-->
 
-
 <!-- center column -->
 <div id="feed">
 
-    <h2> <%=@category_name%> Updates</h2>
+    <h2> <%=@category_name%>  Updates</h2>
     <ul>
       <% @posts.each do |post| %>
       <li>
@@ -46,7 +52,7 @@
             <img src='<%=post.icon%>'/>
             </span>
           <%end%>
-          Posted <%= time_ago_in_words post.created_time %> ago
+          Posted to <a href='http://www.facebook.com/<%=post.page.link%>'>Facebook</a> <%= time_ago_in_words post.created_time %> ago
           
           </div>
         </div>
