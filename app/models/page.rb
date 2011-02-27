@@ -51,9 +51,7 @@ class Page < ActiveRecord::Base
     pages = []
     recommended_array.each do |pair|
       page = pair[0]
-      if page.category == category
-        pages.push(pair[0])
-      end
+      pages.push(pair[0])
     end
     
     if (pages.count >= 5)

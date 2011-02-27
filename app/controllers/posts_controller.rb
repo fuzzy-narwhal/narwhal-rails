@@ -28,7 +28,7 @@ class PostsController < ApplicationController
     @category_tags = Category.find(category_tag_ids).map(&:name)
     @category_tags -= ['people','venues','groups'] # Hack to filter out types
     
-    @pages = Page.get_recommendations(@category_name)
+    @pages = Page.get_recommendations(section)
     
     respond_to do |format|
       format.html # index.html.erb

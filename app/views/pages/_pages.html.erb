@@ -1,12 +1,13 @@
+<h2>Recommended Pages</h2>
+<br>
+<div classid='feed'>
 <%@pages.each do |page| %>
-  <div style='width:310px;border-top:2px solid black;margin-top:6px;padding-top:6px'>
-    <div style='font-weight:bold;padding-bottom:4px'>
+<%if page.link%>
+<div style='float:left;padding-right:4px'>
       <%= image_tag page.profile_picture_url %>
-    </div>
-    <div>
+</div>
       <%= link_to page.name, page.link, :alt => page.name, :target => 'blank' %>
-    </div>
-    <br>
-    <div style='clear:left'></div>
-  </div>
+<div style='clear:left'></div>
 <% end %>
+<% end %>
+</div>
