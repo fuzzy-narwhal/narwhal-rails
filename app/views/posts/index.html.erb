@@ -53,7 +53,7 @@
             <img src='<%=post.icon%>'/>
             </span>
           <%end%>
-          Posted to <a href='http://www.facebook.com/<%=post.page.link%>'>Facebook</a> <%= time_ago_in_words post.created_time %> ago
+          Posted to <a href='<%=post.post_url%>'>Facebook</a> <%= time_ago_in_words post.created_time %> ago
           </div>
         </div>
       </li>
