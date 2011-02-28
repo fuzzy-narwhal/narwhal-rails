@@ -27,7 +27,7 @@ class Page < ActiveRecord::Base
     end
     
     # get page by number of posts limit 25
-    active_pages = Post.find(:all, :select => 'count(page_id) count, page_id', :order => 'count desc', :limit => 25)
+    active_pages = Post.find(:all, :select => 'count(page_id) count, page_id', :order => 'count desc', :limit => 25, :group => 'page_id')
     active_pages.each do |pagepost|
       page2 = Page.find(pagepost.page_id)
       if recommended_pages[page2].nil?
