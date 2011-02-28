@@ -179,7 +179,7 @@ def load_and_save_event(post,eid)
   event = Event.new if not event
   
   event.event_id = event_id
-  event.page_id=json['owner']['id'] if 
+  event.page_id=json['owner']['id'] 
   event.name = json['name']
   event.description = json['description']
   event.start_time = json['start_time']
