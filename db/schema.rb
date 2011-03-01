@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20110227171426) do
   add_index "categories_pages", ["page_id", "category_id"], :name => "index_categories_pages_on_page_id_and_category_id"
 
   create_table "events", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "page_id"
+    t.integer  "event_id",        :limit => 8
+    t.integer  "page_id",         :limit => 8
     t.string   "name"
     t.text     "description"
     t.string   "location"
