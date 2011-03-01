@@ -19,8 +19,8 @@
 class CreateEvents < ActiveRecord::Migration
   def self.up
     create_table :events do |t|
-      t.integer :event_id
-      t.integer :page_id
+      t.bigint :event_id
+      t.bigint :page_id
       t.string :name
       t.text :description
       t.datetime :startime
