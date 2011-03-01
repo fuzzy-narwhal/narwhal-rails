@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  has_many :posts, :dependant => destroy
+  has_many :posts, :dependent => :destroy
   has_many :categories_pages
   has_many :categories, :through=>:categories_pages
   belongs_to :section
