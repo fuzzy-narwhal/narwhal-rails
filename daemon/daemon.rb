@@ -208,7 +208,12 @@ def process_events
     matches = event_url.match /\d+/
     eid=matches[0]
 #    puts eid
-    load_and_save_event(post,eid)
+    begin
+      load_and_save_event(post,eid)
+    rescue Exception => e
+      puts "Error on #{post.link_url}, #{eid}"
+    end
+      
     }
 end
 
