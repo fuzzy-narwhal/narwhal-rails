@@ -19,6 +19,11 @@ class Event < ActiveRecord::Base
     end
   }
 
+  # Generate the url for the actual post on Facebook
+  def event_url
+    "http://facebook.com/event.php?eid=#{self.event_id}"
+  end
+
 def Event.current(category)
   if category
     sql = <<-SQL
