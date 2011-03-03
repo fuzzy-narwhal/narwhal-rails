@@ -10,7 +10,7 @@
        - <%=Date::MONTHNAMES[event.end_time.month]%> <%=event.end_time.day%>
        <%end%>
      </div>
-     <div class="title"><a href='http://www.facebook.com/event.php?eid=<%=event.event_id%>'><%= event.name%></a></div>
+     <div class="title"><%= link_to event.name, event.event_url, :class=>"event_link" %></div>
      <div class="location"><%=event.location%></div>
   </div> <!-- end event -->
 <%}%>
