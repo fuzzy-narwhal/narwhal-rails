@@ -39,6 +39,11 @@ end
 def post
   Post.find_by_post_id(post_id)
 end
+
+def event_link
+  page = Page.find_by_page_id(page_id)
+  page.link if page.link
+end
 end
 =begin
 select events.* from events,pages,categories_pages,categories

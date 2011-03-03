@@ -1,0 +1,32 @@
+#widgets div.event {
+  width:310px;border-bottom:1px solid #ccc;margin-top:6px;padding-top:6px;
+}
+
+#widgets div.icon {
+  vertical-align:0px;position:absolute;
+}
+
+#widgets div.date {
+  font-size:13px;margin-left:23px
+}
+
+#widgets div.title {
+  margin-left:23px;font-weight:bold;color:#555;padding-bottom:4px;
+}
+
+#widgets div.title a:link, #widgets div.title a:visited {
+  color:#333; /*was 555*/
+  text-decoration: none;
+}
+
+#widgets div.title a:hover {
+  color: #a73300;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+#widgets div.location {
+  margin-left:23px;font-weight:normal;color:#aaa;padding-bottom:4px;
+}
+
+
