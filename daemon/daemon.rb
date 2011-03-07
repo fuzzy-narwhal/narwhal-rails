@@ -120,11 +120,10 @@ def save_posts(page, url)
       post.save!
       count = count + 1
     else
-      puts j['id'] + ' already seeded.'
+      #puts j['id'] + ' already seeded.'
     end
-    
-    puts count.to_s + ' posts saved'
   end
+  puts count.to_s + ' posts saved for ' + page.name.to_s
 end
 
 =begin
@@ -194,7 +193,7 @@ def load_and_save_event(post,eid)
     event.venue_latitude=json['venue']['latitude']
     event.venue_longitude=json['venue']['langitude']
   end
-  puts "event: #{event.event_id} #{event.name} #{post.page.name}"
+  #puts "event: #{event.event_id} #{event.name} #{post.page.name}"
   event.save
 end
 
@@ -249,9 +248,9 @@ end
 def crawl_pages
   Page.find(:all).each do |page|
     begin
-      puts 'working on ' + page.page_id
+      #puts 'working on ' + page.page_id
       save_page(page)
-      puts page.name
+      #puts page.name
     rescue =>e
       puts e.message  
     end
@@ -262,7 +261,7 @@ def crawl_posts
   Page.find(:all).each do |page|
     begin
       facebook_url = 'https://graph.facebook.com/' + page.page_id + '/posts'
-      puts 'working on ' + facebook_url
+      #puts 'working on ' + facebook_url
 #      save_page(page)
       save_posts page, facebook_url
     rescue =>e
